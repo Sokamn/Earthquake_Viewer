@@ -14,4 +14,4 @@ data class Earthquake (
     val longitude: Double,
     val tsunami: Int,
     val url: String
-        )
+    )

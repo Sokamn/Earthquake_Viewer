@@ -13,19 +13,18 @@ import android.widget.ImageButton
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.sokamn.earthquakeviewer.EarthquakeRepository.Companion.PER_DAY
 import com.sokamn.earthquakeviewer.EarthquakeRepository.Companion.PER_MOUNTH
 import com.sokamn.earthquakeviewer.EarthquakeRepository.Companion.PER_WEEK
+import com.sokamn.earthquakeviewer.databinding.FragmentListBinding
 
 class ListFragment : Fragment() {
-    private lateinit var rcvEarthquake: RecyclerView
-    private lateinit var btnMenu: ImageButton
-    private lateinit var btnDay: Button
-    private lateinit var btnWeek: Button
-    private lateinit var btnMounth: Button
+    private var _binding: FragmentListBinding? = null
+    private val binding get() = _binding!!
     private val animationIn = AnimationSet(false)
     private val animationOut = AnimationSet(false)
     lateinit var adapter: EarthquakeAdapter
@@ -46,22 +45,17 @@ class ListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val myView = inflater.inflate(R.layout.fragment_list, container, false)
-        rcvEarthquake = myView.findViewById(R.id.rcvEarthquakes)
-        btnMenu = myView.findViewById(R.id.btnMenu)
-        btnMenu.tag = "closed"
-        btnDay = myView.findViewById(R.id.btnDay)
-        btnWeek = myView.findViewById(R.id.btnWeek)
-        btnMounth = myView.findViewById(R.id.btnMounth)
+        _binding = FragmentListBinding.inflate(inflater, container, false)
+        binding.btnMenu.tag = "closed"
 
-        btnMenu.setOnClickListener {
+        binding.btnMenu.setOnClickListener {
             ActionMenu()
         }
-        return myView
+        return binding.root
     }
 
     private fun ActionMenu() {
-        if (btnMenu.tag=="closed"){
+        if (binding.btnMenu.tag=="closed"){
             OpenMenu()
         }else{
             CloseMenu()
@@ -69,63 +63,71 @@ class ListFragment : Fragment() {
     }
 
     private fun CloseMenu() {
-        btnMenu.setBackgroundResource(R.drawable.bg_button_unselected)
-        btnMenu.setImageResource(R.drawable.menu_blue)
-        btnDay.startAnimation(animationOut)
-        btnWeek.startAnimation(animationOut)
-        btnMounth.startAnimation(animationOut)
-        btnDay.visibility = View.GONE
-        btnWeek.visibility = View.GONE
-        btnMounth.visibility = View.GONE
-        btnMenu.tag = "closed"
+        binding.btnMenu.setBackgroundResource(R.drawable.bg_button_unselected)
+        binding.btnMenu.setImageResource(R.drawable.menu_blue)
+        binding.btnDay.startAnimation(animationOut)
+        binding.btnWeek.startAnimation(animationOut)
+        binding.btnMounth.startAnimation(animationOut)
+        binding.btnDay.visibility = View.GONE
+        binding.btnWeek.visibility = View.GONE
+        binding.btnMounth.visibility = View.GONE
+        binding.btnMenu.tag = "closed"
     }
 
     private fun OpenMenu() {
-        btnMenu.setBackgroundResource(R.drawable.bg_button_selected_menu)
-        btnMenu.setImageResource(R.drawable.menu_white)
-        btnDay.startAnimation(animationIn)
-        btnWeek.startAnimation(animationIn)
-        btnMounth.startAnimation(animationIn)
-        btnDay.visibility = View.VISIBLE
-        btnWeek.visibility = View.VISIBLE
-        btnMounth.visibility = View.VISIBLE
-        btnMenu.tag = "opened"
+        binding.btnMenu.setBackgroundResource(R.drawable.bg_button_selected_menu)
+        binding.btnMenu.setImageResource(R.drawable.menu_white)
+        binding.btnDay.startAnimation(animationIn)
+        binding.btnWeek.startAnimation(animationIn)
+        binding.btnMounth.startAnimation(animationIn)
+        binding.btnDay.visibility = View.VISIBLE
+        binding.btnWeek.visibility = View.VISIBLE
+        binding.btnMounth.visibility = View.VISIBLE
+        binding.btnMenu.tag = "opened"
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val viewModel = ViewModelProvider(this)[EarthquakeViewModel::class.java]
-        rcvEarthquake.layoutManager = LinearLayoutManager(requireActivity())
+        binding.rcvEarthquakes.layoutManager = LinearLayoutManager(requireActivity())
         adapter = EarthquakeAdapter()
-        rcvEarthquake.adapter = adapter
+        binding.rcvEarthquakes.adapter = adapter
 
         viewModel.list.observe(viewLifecycleOwner, Observer{ listEarthquake: MutableList<Earthquake> ->
             adapter.submitList(listEarthquake)
             handleEmptyList(listEarthquake, view)
         })
 
+        viewModel.status.observe(viewLifecycleOwner, Observer{
+            when(it){
+                ApiResponseStatus.LOADING-> binding.psbProgressAPI.visibility = View.VISIBLE
+                ApiResponseStatus.SUCCESS-> binding.psbProgressAPI.visibility = View.GONE
+                ApiResponseStatus.ERROR-> binding.psbProgressAPI.visibility = View.GONE
+            }
+        })
+
         adapter.onItemClickListener = {
             Toast.makeText(requireContext(), it.place, Toast.LENGTH_SHORT).show()
         }
-        btnDay.setOnClickListener {
-            if(btnDay.tag == "selected"){
+        binding.btnDay.setOnClickListener {
+            if(binding.btnDay.tag == "selected"){
                 Toast.makeText(requireContext(),"Ya se muestran los terremotos del último día.",Toast.LENGTH_SHORT).show()
             }else{
                 viewModel.getXEarthquake(PER_DAY)
                 setBtnDaySelected()
             }
         }
-        btnWeek.setOnClickListener {
-            if(btnWeek.tag == "selected"){
+        binding.btnWeek.setOnClickListener {
+            if(binding.btnWeek.tag == "selected"){
                 Toast.makeText(requireContext(),"Ya se muestran los terremotos de la última semana.",Toast.LENGTH_SHORT).show()
             }else{
                 viewModel.getXEarthquake(PER_WEEK)
                 setBtnWeekSelected()
             }
         }
-        btnMounth.setOnClickListener {
-            if(btnMounth.tag == "selected"){
+        binding.btnMounth.setOnClickListener {
+            if(binding.btnMounth.tag == "selected"){
                 Toast.makeText(requireContext(),"Ya se muestran los terremotos del último mes.",Toast.LENGTH_SHORT).show()
             }else{
                 viewModel.getXEarthquake(PER_MOUNTH)
@@ -135,28 +137,28 @@ class ListFragment : Fragment() {
     }
 
     private fun setBtnMounthSelected() {
-        btnDay.setBackgroundResource(R.drawable.bg_button_unselected)
-        btnWeek.setBackgroundResource(R.drawable.bg_button_unselected)
-        btnMounth.setBackgroundResource(R.drawable.bg_button_selected)
-        btnDay.tag = "unselected"
-        btnWeek.tag = "unselected"
-        btnMounth.tag = "selected"
+        binding.btnDay.setBackgroundResource(R.drawable.bg_button_unselected)
+        binding.btnWeek.setBackgroundResource(R.drawable.bg_button_unselected)
+        binding.btnMounth.setBackgroundResource(R.drawable.bg_button_selected)
+        binding.btnDay.tag = "unselected"
+        binding.btnWeek.tag = "unselected"
+        binding.btnMounth.tag = "selected"
     }
     private fun setBtnWeekSelected() {
-        btnDay.setBackgroundResource(R.drawable.bg_button_unselected)
-        btnWeek.setBackgroundResource(R.drawable.bg_button_selected)
-        btnMounth.setBackgroundResource(R.drawable.bg_button_unselected)
-        btnDay.tag = "unselected"
-        btnWeek.tag = "selected"
-        btnMounth.tag = "unselected"
+        binding.btnDay.setBackgroundResource(R.drawable.bg_button_unselected)
+        binding.btnWeek.setBackgroundResource(R.drawable.bg_button_selected)
+        binding.btnMounth.setBackgroundResource(R.drawable.bg_button_unselected)
+        binding.btnDay.tag = "unselected"
+        binding.btnWeek.tag = "selected"
+        binding.btnMounth.tag = "unselected"
     }
     private fun setBtnDaySelected() {
-        btnDay.setBackgroundResource(R.drawable.bg_button_selected)
-        btnWeek.setBackgroundResource(R.drawable.bg_button_unselected)
-        btnMounth.setBackgroundResource(R.drawable.bg_button_unselected)
-        btnDay.tag = "selected"
-        btnWeek.tag = "unselected"
-        btnMounth.tag = "unselected"
+        binding.btnDay.setBackgroundResource(R.drawable.bg_button_selected)
+        binding.btnWeek.setBackgroundResource(R.drawable.bg_button_unselected)
+        binding.btnMounth.setBackgroundResource(R.drawable.bg_button_unselected)
+        binding.btnDay.tag = "selected"
+        binding.btnWeek.tag = "unselected"
+        binding.btnMounth.tag = "unselected"
     }
 
     private fun handleEmptyList(earthquakeList: MutableList<Earthquake>, view: View) {
