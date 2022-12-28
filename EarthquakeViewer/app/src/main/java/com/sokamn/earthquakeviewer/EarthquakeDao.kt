@@ -3,12 +3,13 @@ package com.sokamn.earthquakeviewer
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 
 @Dao
 interface EarthquakeDao {
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll (earthquakeList: MutableList<Earthquake>)
     @Query("SELECT * FROM earthquake")
     fun getAll(): MutableList<Earthquake>

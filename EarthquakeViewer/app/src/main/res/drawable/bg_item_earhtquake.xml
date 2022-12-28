@@ -6,4 +6,6 @@
         android:centerColor="@color/secundaryColor"
         android:startColor="@color/thirdColor"
         android:type="linear"/>
+    <corners android:radius="10dp"/>
+
 </shape>

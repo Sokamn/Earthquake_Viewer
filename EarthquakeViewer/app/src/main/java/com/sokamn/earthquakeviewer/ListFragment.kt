@@ -89,7 +89,7 @@ class ListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val viewModel = ViewModelProvider(this)[EarthquakeViewModel::class.java]
+        val viewModel = ViewModelProvider(this, EarthquakeViewModelFactory(requireActivity().application))[EarthquakeViewModel::class.java]
         binding.rcvEarthquakes.layoutManager = LinearLayoutManager(requireActivity())
         adapter = EarthquakeAdapter()
         binding.rcvEarthquakes.adapter = adapter

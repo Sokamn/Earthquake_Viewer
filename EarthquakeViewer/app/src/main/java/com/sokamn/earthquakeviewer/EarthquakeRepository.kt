@@ -1,13 +1,14 @@
 package com.sokamn.earthquakeviewer
 
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class EarthquakeRepository {
+class EarthquakeRepository(private val db: EarthquakeDB) {
     private val useCase = EarthquakeUseCase()
      internal suspend fun getEarthquakes(id: Int) : MutableList<Earthquake>{
         return withContext(Dispatchers.IO){
@@ -30,12 +31,17 @@ class EarthquakeRepository {
                 earthquakeList.clear()
                 if (response?.features?.isNotEmpty() == true){
                     earthquakeList = useCase.parseCallResponse(response)
+                    db.earthquakeDao.insertAll(earthquakeList)
                 }
             }else{
                 Log.d("ERRESPONSE", finishCall.errorBody().toString())
             }
             earthquakeList
         }
+    }
+
+    fun getEarthquakeByDB(): MutableList<Earthquake>{
+        return db.earthquakeDao.getAll()
     }
 
     companion object {

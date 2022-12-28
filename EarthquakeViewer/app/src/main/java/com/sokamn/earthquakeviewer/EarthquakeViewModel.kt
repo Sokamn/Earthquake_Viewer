@@ -1,17 +1,16 @@
 package com.sokamn.earthquakeviewer
 
+import android.app.Application
 import android.util.Log
 import android.view.View
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.sokamn.earthquakeviewer.EarthquakeRepository.Companion.PER_DAY
 import kotlinx.coroutines.*
 import java.net.UnknownHostException
 
-class EarthquakeViewModel: ViewModel() {
-    private val repository = EarthquakeRepository()
+class EarthquakeViewModel(app: Application): AndroidViewModel(app) {
+    private val db = getDatabase(app)
+    private val repository = EarthquakeRepository(db)
     private val mList = MutableLiveData<MutableList<Earthquake>>()
     val list: LiveData<MutableList<Earthquake>>
         get() = mList
@@ -29,6 +28,7 @@ class EarthquakeViewModel: ViewModel() {
             }catch (e: UnknownHostException){
                 Log.i("ERROR", "no hay internet | $e")
                 mStatus.value = ApiResponseStatus.ERROR
+                mList.value = repository.getEarthquakeByDB()
             }
 
         }
