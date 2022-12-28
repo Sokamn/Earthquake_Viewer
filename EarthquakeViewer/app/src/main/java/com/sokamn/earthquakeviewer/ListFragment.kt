@@ -1,5 +1,6 @@
 package com.sokamn.earthquakeviewer
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -28,6 +29,7 @@ class ListFragment : Fragment() {
     private val animationIn = AnimationSet(false)
     private val animationOut = AnimationSet(false)
     lateinit var adapter: EarthquakeAdapter
+    private lateinit var listener: EarthquakeSelectedListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,6 +54,11 @@ class ListFragment : Fragment() {
             ActionMenu()
         }
         return binding.root
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        listener = context as EarthquakeSelectedListener
     }
 
     private fun ActionMenu() {
@@ -108,7 +115,7 @@ class ListFragment : Fragment() {
         })
 
         adapter.onItemClickListener = {
-            Toast.makeText(requireContext(), it.place, Toast.LENGTH_SHORT).show()
+            listener.onEarthquakeSelected(it)
         }
         binding.btnDay.setOnClickListener {
             if(binding.btnDay.tag == "selected"){
