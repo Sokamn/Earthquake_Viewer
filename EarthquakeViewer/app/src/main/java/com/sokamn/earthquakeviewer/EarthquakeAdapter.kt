@@ -1,5 +1,6 @@
 package com.sokamn.earthquakeviewer
 
+import android.annotation.SuppressLint
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -7,14 +8,21 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.sokamn.earthquakeviewer.databinding.ItemEarthquakeBinding
+import java.text.Format
+import java.text.SimpleDateFormat
+import java.util.*
 
-class EarthquakeAdapter : androidx.recyclerview.widget.ListAdapter<Earthquake, EarthquakeAdapter.RazaViewHolder>(DiffCallBack){
+class EarthquakeAdapter : androidx.recyclerview.widget.ListAdapter<Earthquake, EarthquakeAdapter.EarthquakeViewHolder>(DiffCallBack){
     lateinit var onItemClickListener: (Earthquake) -> Unit
-    inner class RazaViewHolder(view:View): RecyclerView.ViewHolder(view) {
+    inner class EarthquakeViewHolder(view:View): RecyclerView.ViewHolder(view) {
         val binding = ItemEarthquakeBinding.bind(view)
+        @SuppressLint("SetTextI18n", "SimpleDateFormat")
         fun render(earthquake: Earthquake){
             binding.txvMagnitude.text = earthquake.magnitude.toString()
             binding.txvPlace.text = earthquake.place
+            val date = Date(earthquake.duracion)
+            val format: Format = SimpleDateFormat("HH:mm")
+            binding.txvTime.text = "${format.format(date)} UTM"
 
             itemView.setOnClickListener {
                 if (::onItemClickListener.isInitialized){
@@ -26,14 +34,14 @@ class EarthquakeAdapter : androidx.recyclerview.widget.ListAdapter<Earthquake, E
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RazaViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EarthquakeViewHolder {
         val view: View = LayoutInflater
             .from(parent.context)
             .inflate(R.layout.item_earthquake,parent,false)
-        return RazaViewHolder(view)
+        return EarthquakeViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: RazaViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: EarthquakeViewHolder, position: Int) {
         val item = getItem(position)
         holder.render(item)
     }

@@ -73,7 +73,7 @@
             android:layout_height="match_parent">
 
             <Button
-                android:id="@+id/btnContinueAR"
+                android:id="@+id/btnMoreInfoFD"
                 android:layout_width="180dp"
                 android:layout_height="60dp"
                 android:layout_marginStart="30dp"

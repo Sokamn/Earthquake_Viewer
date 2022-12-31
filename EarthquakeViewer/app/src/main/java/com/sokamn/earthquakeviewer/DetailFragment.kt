@@ -2,6 +2,7 @@ package com.sokamn.earthquakeviewer
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.VibrationEffect
@@ -48,6 +49,10 @@ class DetailFragment : Fragment() {
             intent.putExtra("earthquakeSelected",selectedEarthquake)
             startActivity(intent)
         }
+        binding.btnMoreInfoFD.setOnClickListener {
+            val link = Uri.parse(selectedEarthquake.url)
+            startActivity(Intent(Intent.ACTION_VIEW, link))
+        }
     }
 
     private fun renderActivity(earthquake: Earthquake) {
@@ -80,6 +85,7 @@ class DetailFragment : Fragment() {
 
         val date = convertTimeToDate(earthquake.duracion)
         val hour = convertTimeToHour(earthquake.duracion)
+
         binding.txvTitleEarthquake.text = earthquake.place
         binding.txvDateEarthquake.text = date
         binding.txvHourEarthquake.text = hour
