@@ -1,6 +1,7 @@
 package com.sokamn.earthquakeviewer
 
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.os.VibrationEffect
@@ -32,10 +33,21 @@ class DetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentDetailBinding.inflate(inflater, container, false)
+
+
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         val selectedEarthquake = args.earthquake
         renderActivity(selectedEarthquake)
 
-        return binding.root
+        binding.imvPlaceHolderGPS.setOnClickListener {
+            val intent = Intent(activity, MapActivity::class.java)
+            intent.putExtra("earthquakeSelected",selectedEarthquake)
+            startActivity(intent)
+        }
     }
 
     private fun renderActivity(earthquake: Earthquake) {
