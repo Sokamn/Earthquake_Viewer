@@ -24,6 +24,7 @@ class SpashActivity : AppCompatActivity() {
         imvLogo.animation = animation
         Handler(Looper.getMainLooper()).postDelayed({
             startActivity(Intent(this, MainActivity::class.java))
+            finish()
         }, 3000)
     }
 }
