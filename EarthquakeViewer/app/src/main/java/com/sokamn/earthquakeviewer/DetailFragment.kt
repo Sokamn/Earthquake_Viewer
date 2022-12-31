@@ -63,24 +63,23 @@ class DetailFragment : Fragment() {
                 vibrator.vibrate(VibrationEffect.createOneShot(200, VibrationEffect.DEFAULT_AMPLITUDE))
             }else if(earthquake.magnitude<7){
                 binding.imvMagnitudeFD.setImageResource(R.drawable.speedometer_medium)
-                vibrator.vibrate(VibrationEffect.createOneShot(200, VibrationEffect.EFFECT_CLICK))
+                vibrator.vibrate(VibrationEffect.createOneShot(400, VibrationEffect.DEFAULT_AMPLITUDE))
             }else{
                 binding.imvMagnitudeFD.setImageResource(R.drawable.speedometer_high)
-                vibrator.vibrate(VibrationEffect.createOneShot(200, VibrationEffect.EFFECT_HEAVY_CLICK))
+                vibrator.vibrate(VibrationEffect.createOneShot(600, VibrationEffect.DEFAULT_AMPLITUDE))
             }
         } else {
             if(earthquake.magnitude<5.5){
                 binding.imvMagnitudeFD.setImageResource(R.drawable.speedometer_low)
-                vibrator.vibrate(500)
+                vibrator.vibrate(200)
             }else if(earthquake.magnitude<7){
                 binding.imvMagnitudeFD.setImageResource(R.drawable.speedometer_medium)
-                vibrator.vibrate(1000)
+                vibrator.vibrate(400)
             }else{
                 binding.imvMagnitudeFD.setImageResource(R.drawable.speedometer_high)
-                vibrator.vibrate(1500)
+                vibrator.vibrate(600)
             }
         }
-
 
 
         val date = convertTimeToDate(earthquake.duracion)
