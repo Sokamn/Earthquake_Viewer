@@ -22,7 +22,7 @@ class EarthquakeAdapter : androidx.recyclerview.widget.ListAdapter<Earthquake, E
             binding.txvPlace.text = earthquake.place
             val date = Date(earthquake.duracion)
             val format: Format = SimpleDateFormat("HH:mm")
-            binding.txvTime.text = "${format.format(date)} UTM"
+            binding.txvTime.text = "${format.format(date)} ART"
 
             itemView.setOnClickListener {
                 if (::onItemClickListener.isInitialized){
