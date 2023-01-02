@@ -1,4 +1,4 @@
-package com.sokamn.earthquakeviewer
+package com.sokamn.earthquakeviewer.model
 
 import android.os.Parcelable
 import androidx.room.Entity

@@ -1,4 +1,4 @@
-package com.sokamn.earthquakeviewer
+package com.sokamn.earthquakeviewer.ui.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.ViewModel

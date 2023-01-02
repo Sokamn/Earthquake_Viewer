@@ -1,4 +1,4 @@
-package com.sokamn.earthquakeviewer
+package com.sokamn.earthquakeviewer.model
 
 data class Geometry (val coordinates: List<Double>){
         val longitude: Double

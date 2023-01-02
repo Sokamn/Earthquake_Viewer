@@ -1,10 +1,13 @@
-package com.sokamn.earthquakeviewer
+package com.sokamn.earthquakeviewer.ui.viewmodel
 
 import android.app.Application
 import android.util.Log
-import android.view.View
 import androidx.lifecycle.*
-import com.sokamn.earthquakeviewer.EarthquakeRepository.Companion.PER_DAY
+import com.sokamn.earthquakeviewer.data.db.getDatabase
+import com.sokamn.earthquakeviewer.data.network.ApiResponseStatus
+import com.sokamn.earthquakeviewer.data.network.EarthquakeRepository
+import com.sokamn.earthquakeviewer.data.network.EarthquakeRepository.Companion.PER_DAY
+import com.sokamn.earthquakeviewer.model.Earthquake
 import kotlinx.coroutines.*
 import java.net.UnknownHostException
 

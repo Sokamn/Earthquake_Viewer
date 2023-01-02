@@ -1,4 +1,6 @@
-package com.sokamn.earthquakeviewer
+package com.sokamn.earthquakeviewer.data.network.model
+
+import com.sokamn.earthquakeviewer.model.Earthquake
 
 class EarthquakeUseCase {
     internal fun parseCallResponse(call: EarthquakeJsonResponse): MutableList<Earthquake> {

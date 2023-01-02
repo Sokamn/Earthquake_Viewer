@@ -1,4 +1,4 @@
-package com.sokamn.earthquakeviewer
+package com.sokamn.earthquakeviewer.ui.fragment
 
 import android.content.Context
 import android.content.Intent
@@ -10,9 +10,11 @@ import android.os.Vibrator
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
+import com.sokamn.earthquakeviewer.model.Earthquake
+import com.sokamn.earthquakeviewer.ui.MapActivity
+import com.sokamn.earthquakeviewer.R
 import com.sokamn.earthquakeviewer.databinding.FragmentDetailBinding
 import java.text.Format
 import java.text.SimpleDateFormat

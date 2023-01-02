@@ -1,6 +1,7 @@
-package com.sokamn.earthquakeviewer
+package com.sokamn.earthquakeviewer.data.network
 
-import com.sokamn.earthquakeviewer.EarthquakeAPIService.Companion.URL_EARTHQUAKE
+import com.sokamn.earthquakeviewer.data.network.model.EarthquakeJsonResponse
+import com.sokamn.earthquakeviewer.data.network.EarthquakeAPIService.Companion.URL_EARTHQUAKE
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory

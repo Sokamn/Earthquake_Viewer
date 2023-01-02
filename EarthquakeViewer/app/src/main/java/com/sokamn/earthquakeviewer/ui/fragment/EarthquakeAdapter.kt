@@ -1,4 +1,4 @@
-package com.sokamn.earthquakeviewer
+package com.sokamn.earthquakeviewer.ui.fragment
 
 import android.annotation.SuppressLint
 import android.util.Log
@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.sokamn.earthquakeviewer.databinding.ItemEarthquakeBinding
+import com.sokamn.earthquakeviewer.model.Earthquake
 import java.text.Format
 import java.text.SimpleDateFormat
 import java.util.*

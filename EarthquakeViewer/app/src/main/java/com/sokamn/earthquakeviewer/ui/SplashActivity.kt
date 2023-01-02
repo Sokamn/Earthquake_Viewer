@@ -1,4 +1,4 @@
-package com.sokamn.earthquakeviewer
+package com.sokamn.earthquakeviewer.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -10,8 +10,9 @@ import android.view.animation.Animation
 import android.view.animation.AnimationSet
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
+import com.sokamn.earthquakeviewer.ui.MainActivity
 
-class SpashActivity : AppCompatActivity() {
+class SplashActivity : AppCompatActivity() {
     private val animation = AnimationSet(false)
     private lateinit var imvLogo: ImageView
     override fun onCreate(savedInstanceState: Bundle?) {

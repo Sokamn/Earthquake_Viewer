@@ -1,4 +1,4 @@
-package com.sokamn.earthquakeviewer
+package com.sokamn.earthquakeviewer.ui.fragment
 
 import android.content.Context
 import android.os.Bundle
@@ -9,19 +9,20 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationSet
 import android.view.animation.AnimationUtils
-import android.widget.Button
-import android.widget.ImageButton
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
-import com.sokamn.earthquakeviewer.EarthquakeRepository.Companion.PER_DAY
-import com.sokamn.earthquakeviewer.EarthquakeRepository.Companion.PER_MOUNTH
-import com.sokamn.earthquakeviewer.EarthquakeRepository.Companion.PER_WEEK
+import com.sokamn.earthquakeviewer.*
+import com.sokamn.earthquakeviewer.data.network.ApiResponseStatus
+import com.sokamn.earthquakeviewer.data.network.EarthquakeRepository.Companion.PER_DAY
+import com.sokamn.earthquakeviewer.data.network.EarthquakeRepository.Companion.PER_MOUNTH
+import com.sokamn.earthquakeviewer.data.network.EarthquakeRepository.Companion.PER_WEEK
 import com.sokamn.earthquakeviewer.databinding.FragmentListBinding
+import com.sokamn.earthquakeviewer.model.Earthquake
+import com.sokamn.earthquakeviewer.ui.viewmodel.EarthquakeViewModel
+import com.sokamn.earthquakeviewer.ui.viewmodel.EarthquakeViewModelFactory
 
 class ListFragment : Fragment() {
     private var _binding: FragmentListBinding? = null
@@ -108,9 +109,9 @@ class ListFragment : Fragment() {
 
         viewModel.status.observe(viewLifecycleOwner, Observer{
             when(it){
-                ApiResponseStatus.LOADING-> binding.psbProgressAPI.visibility = View.VISIBLE
-                ApiResponseStatus.SUCCESS-> binding.psbProgressAPI.visibility = View.GONE
-                ApiResponseStatus.ERROR-> binding.psbProgressAPI.visibility = View.GONE
+                ApiResponseStatus.LOADING -> binding.psbProgressAPI.visibility = View.VISIBLE
+                ApiResponseStatus.SUCCESS -> binding.psbProgressAPI.visibility = View.GONE
+                ApiResponseStatus.ERROR -> binding.psbProgressAPI.visibility = View.GONE
             }
         })
 

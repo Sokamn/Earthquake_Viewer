@@ -1,11 +1,11 @@
-package com.sokamn.earthquakeviewer
+package com.sokamn.earthquakeviewer.data.network
 
 import android.util.Log
-import android.widget.Toast
-import androidx.lifecycle.viewModelScope
+import com.sokamn.earthquakeviewer.data.network.model.EarthquakeJsonResponse
+import com.sokamn.earthquakeviewer.data.network.model.EarthquakeUseCase
+import com.sokamn.earthquakeviewer.data.db.EarthquakeDB
+import com.sokamn.earthquakeviewer.model.Earthquake
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class EarthquakeRepository(private val db: EarthquakeDB) {
