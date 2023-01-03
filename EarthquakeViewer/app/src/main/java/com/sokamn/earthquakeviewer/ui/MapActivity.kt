@@ -39,6 +39,7 @@ class MapActivity : AppCompatActivity() {
                     .zoom(6.0)
                     .build()
             )
+
         }
 
     }
