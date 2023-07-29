@@ -6,6 +6,7 @@
         <item name="colorTertiary">@color/blue_light_100</item>
 
         <item name="android:textColor">@color/white</item>
+        <item name="android:statusBarColor">@color/background_dark_theme</item>
     </style>
 
     <style name="ItemEarthquake">
@@ -20,7 +21,7 @@
         <item name="android:src">@drawable/bg_home_black</item>
     </style>
 
-    <style name="CardView">
+    <style name="MainCardView" parent="Widget.MaterialComponents.CardView">
         <item name="cardBackgroundColor">@color/card_background_dark_theme</item>
         <item name="cardElevation">10dp</item>
         <item name="strokeWidth">0dp</item>
