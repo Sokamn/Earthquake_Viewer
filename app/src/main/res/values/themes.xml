@@ -1,0 +1,30 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.EarthquakeViewer" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/blue_light_1000</item>
+        <item name="colorSecondary">@color/blue_light_500</item>
+        <item name="colorTertiary">@color/blue_light_100</item>
+    </style>
+
+    <style name="Theme.EarthquakeViewer" parent="Base.Theme.EarthquakeViewer" />
+
+    <style name="Screen">
+        <item name="android:background">@color/background_light_theme</item>
+    </style>
+
+    <style name="PrimaryButton" parent="Widget.Material3.Button">
+        <item name="android:paddingTop">5sp</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:letterSpacing">0</item>
+        <item name="android:backgroundTint">@null</item>
+        <item name="android:background">@drawable/main_gradient</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:gravity">center</item>
+        <item name="rippleColor">@color/shimmer_color</item>
+        <item name="cornerRadius">10dp</item>
+    </style>
+
+</resources>
