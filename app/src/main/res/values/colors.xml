@@ -12,4 +12,8 @@
     <color name="background_dark_theme">#252525</color>
     <color name="background_light_theme">#F5F5F5</color>
 
+    <color name="card_background_dark_theme">#333333</color>
+    <color name="card_background_light_theme">#FFFFFF</color>
+
+
 </resources>

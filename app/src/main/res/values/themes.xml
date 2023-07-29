@@ -18,6 +18,17 @@
         <item name="android:background">@color/background_light_theme</item>
     </style>
 
+    <style name="MainMountain">
+        <item name="android:src">@drawable/bg_home_white</item>
+    </style>
+
+    <style name="MainCardView" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">@color/card_background_light_theme</item>
+        <item name="cardElevation">10dp</item>
+        <item name="strokeWidth">0dp</item>
+        <item name="cardCornerRadius">40dp</item>
+    </style>
+
     <style name="PrimaryButton" parent="Widget.Material3.Button">
         <item name="android:textAllCaps">true</item>
         <item name="android:textColor">@color/white</item>
