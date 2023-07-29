@@ -4,6 +4,12 @@
         <item name="colorPrimary">@color/blue_light_1000</item>
         <item name="colorSecondary">@color/blue_light_500</item>
         <item name="colorTertiary">@color/blue_light_100</item>
+
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="ItemEarthquake">
+        <item name="android:background">@drawable/main_gradient_dark</item>
     </style>
 
     <style name="Screen">

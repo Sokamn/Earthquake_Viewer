@@ -5,8 +5,11 @@
     <color name="blue_light_1000">#009EE9</color>
     <color name="blue_light_500">#5EB4DC</color>
     <color name="blue_light_100">#7ADFFB</color>
+    <color name="black_1000">#202020</color>
+    <color name="black_100">#262626</color>
+
     <color name="shimmer_color">#D9D9D9</color>
-    <color name="background_dark_theme">#F5F5F5</color>
-    <color name="background_light_theme">#252525</color>
+    <color name="background_dark_theme">#252525</color>
+    <color name="background_light_theme">#F5F5F5</color>
 
 </resources>

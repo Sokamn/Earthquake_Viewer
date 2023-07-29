@@ -1,7 +1,18 @@
 <resources>
     <string name="app_name">Earthquake Viewer</string>
 
+    <!--> MAPBOX TOKEN <!-->
     <string name="mapbox_access_token">pk.eyJ1Ijoic29rYW1uIiwiYSI6ImNsYnJsNWFzaDF3aTAzdXF4NjY3ZnRvc24ifQ.aBHa5O63V9Ao30c2UlauUw</string>
+
+    <!--> TITULOS, SUBTITULOS Y TEXTOS <!-->
+    <string name="welcome">Bienvenido</string>
+    <string name="hour">Hora</string>
+    <string name="reviewed">Revisado</string>
+    <string name="date">Fecha</string>
+    <string name="tsunami">Tsunami</string>
+    <string name="magnitude">Magnitud</string>
+    <string name="moreInfo">Más Información</string>
+    <string name="addInfo">Información Adicional</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
