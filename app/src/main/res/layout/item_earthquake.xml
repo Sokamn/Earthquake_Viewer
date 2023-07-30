@@ -65,7 +65,6 @@
             android:layout_marginEnd="20dp"
             android:fontFamily="@font/poppinsmedium"
             android:text="Central Alaska"
-            android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="@+id/imvPlace"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imvPlace"
@@ -78,7 +77,6 @@
             android:layout_marginStart="5dp"
             android:fontFamily="@font/poppinsmedium"
             android:text="1.1"
-            android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="@+id/imvMagnitude"
             app:layout_constraintStart_toEndOf="@+id/imvPlace"
             app:layout_constraintTop_toTopOf="@+id/imvMagnitude" />
@@ -90,7 +88,6 @@
             android:layout_marginStart="5dp"
             android:fontFamily="@font/poppinsmedium"
             android:text="20:10 UTM"
-            android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="@+id/imvMagnitude"
             app:layout_constraintStart_toEndOf="@+id/imvTime"
             app:layout_constraintTop_toTopOf="@+id/imvMagnitude" />

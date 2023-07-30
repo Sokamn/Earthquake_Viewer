@@ -42,4 +42,5 @@
         <item name="rippleColor">@color/shimmer_color</item>
     </style>
 
+    <string name="themeMode">light</string>
 </resources>

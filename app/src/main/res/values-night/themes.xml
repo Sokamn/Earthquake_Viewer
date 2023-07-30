@@ -42,4 +42,6 @@
         <item name="rippleColor">@color/shimmer_color</item>
         <item name="cornerRadius">10dp</item>
     </style>
+
+    <string name="themeMode">dark</string>
 </resources>

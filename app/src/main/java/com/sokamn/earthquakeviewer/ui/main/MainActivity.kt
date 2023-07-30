@@ -7,7 +7,9 @@ import android.os.Bundle
 import android.view.View
 import com.sokamn.earthquakeviewer.R
 import com.sokamn.earthquakeviewer.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     companion object {
@@ -26,15 +28,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun initUI() {
         setUIComponents()
-        initObservers()
-    }
-
-    private fun initObservers() {
-
     }
 
     private fun setUIComponents() {
-        //window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-
+        if(resources.getString(R.string.themeMode)=="light")
+            window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
     }
 }
