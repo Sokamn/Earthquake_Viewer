@@ -23,15 +23,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        initUI()
-    }
 
-    private fun initUI() {
-        setUIComponents()
-    }
 
-    private fun setUIComponents() {
-        if(resources.getString(R.string.themeMode)=="light")
-            window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
     }
 }

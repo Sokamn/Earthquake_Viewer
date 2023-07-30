@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -81,10 +82,25 @@ class ListFragment : Fragment() {
     }
 
     private fun initListeners() {
+        binding.swtThemeMode.setOnCheckedChangeListener { btnView, isChecked ->
+            AppCompatDelegate.setDefaultNightMode(
+                if(isChecked){
+                    AppCompatDelegate.MODE_NIGHT_YES
+                }else{
+                    AppCompatDelegate.MODE_NIGHT_NO
+            })
 
+        }
     }
 
     private fun setUIComponents() {
+        if(resources.getString(R.string.themeMode)=="light"){
+            requireActivity().window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+            binding.swtThemeMode.isChecked = false
+        }else{
+            requireActivity().window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_VISIBLE
+            binding.swtThemeMode.isChecked = true
+        }
         binding.rcvEarthquakes.apply {
             adapter = earthquakeAdapter
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL,false)
