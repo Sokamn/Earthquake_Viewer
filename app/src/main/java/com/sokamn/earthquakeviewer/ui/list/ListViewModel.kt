@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.sokamn.earthquakeviewer.core.Event
 import com.sokamn.earthquakeviewer.domain.model.Earthquake
 import com.sokamn.earthquakeviewer.domain.usecase.GetEarthquakeUseCase
 import com.sokamn.earthquakeviewer.domain.util.AppConstants
@@ -18,6 +19,10 @@ import javax.inject.Inject
 class ListViewModel @Inject constructor(
     private val getEarthquakeUseCase: GetEarthquakeUseCase
 ) : ViewModel() {
+
+    private val _earthquakeSelected = MutableLiveData<Event<Earthquake>>()
+    val earthquakeSelected: LiveData<Event<Earthquake>>
+        get() = _earthquakeSelected
 
     private val _earthquakeState = MutableLiveData<Resource<List<Earthquake>>>()
     val earthquakeState: LiveData<Resource<List<Earthquake>>>
@@ -34,6 +39,10 @@ class ListViewModel @Inject constructor(
                 _earthquakeState.value = it
             }.launchIn(viewModelScope)
         }
+    }
+
+    fun onEarthquakeSelected(earthquake: Earthquake){
+        _earthquakeSelected.value = Event(earthquake)
     }
 
 }

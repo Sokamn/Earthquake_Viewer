@@ -17,7 +17,6 @@ import java.util.Date
 import java.util.Locale
 
 class EarthquakeAdapter : ListAdapter<Earthquake, EarthquakeAdapter.EarthquakeViewHolder>(DiffCallBack){
-    lateinit var onItemClickListener: (Earthquake) -> Unit
 
     inner class EarthquakeViewHolder(view: View): RecyclerView.ViewHolder(view) {
         val binding = ItemEarthquakeBinding.bind(view)
@@ -29,13 +28,18 @@ class EarthquakeAdapter : ListAdapter<Earthquake, EarthquakeAdapter.EarthquakeVi
             val time = " ARG"
             binding.txvTime.text = format.format(date) + time
 
-
             itemView.setOnClickListener {
-                if (::onItemClickListener.isInitialized){
-                    onItemClickListener(earthquake)
+                onEarthquakeClickListener?.let { click ->
+                    click(earthquake)
                 }
             }
         }
+    }
+
+    protected var onEarthquakeClickListener : ((Earthquake) -> Unit)? = null
+
+    fun setProductClickListener(listener: (Earthquake) -> Unit){
+        onEarthquakeClickListener = listener
     }
 
 

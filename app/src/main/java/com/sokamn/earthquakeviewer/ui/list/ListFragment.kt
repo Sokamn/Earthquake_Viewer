@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sokamn.earthquakeviewer.R
@@ -67,6 +68,12 @@ class ListFragment : Fragment() {
                 else-> binding.psbProgressAPI.hide()
             }
         }
+
+        listViewModel.earthquakeSelected.observe(viewLifecycleOwner) {
+            it.getContentIfNotHandled()?.let { earthquake ->
+                goToDetail(earthquake)
+            }
+        }
     }
 
     private fun handleSuccess(result: Resource<List<Earthquake>>) {
@@ -89,7 +96,9 @@ class ListFragment : Fragment() {
                 }else{
                     AppCompatDelegate.MODE_NIGHT_NO
             })
-
+        }
+        earthquakeAdapter.setProductClickListener { earthquake ->
+            listViewModel.onEarthquakeSelected(earthquake)
         }
     }
 
@@ -106,6 +115,11 @@ class ListFragment : Fragment() {
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL,false)
             itemAnimator = DefaultItemAnimator()
         }
+    }
+
+    private fun goToDetail(earthquake: Earthquake){
+        val action = ListFragmentDirections.actionListFragmentToDetailFragment(earthquake)
+        findNavController().navigate(action)
     }
 
 }
