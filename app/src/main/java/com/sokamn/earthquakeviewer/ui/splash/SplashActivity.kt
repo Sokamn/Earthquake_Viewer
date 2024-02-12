@@ -20,7 +20,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class SplashActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySplashBinding
     private val splashViewModel: SplashViewModel by viewModels()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivitySplashBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)

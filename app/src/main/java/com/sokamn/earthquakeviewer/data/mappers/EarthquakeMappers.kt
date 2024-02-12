@@ -1,6 +1,5 @@
 package com.sokamn.earthquakeviewer.data.mappers
 
-import com.sokamn.earthquakeviewer.data.remote.response.EarthquakeDto
 import com.sokamn.earthquakeviewer.data.remote.response.FeaturesDto
 import com.sokamn.earthquakeviewer.domain.model.Earthquake
 

@@ -38,7 +38,7 @@ class EarthquakeAdapter : ListAdapter<Earthquake, EarthquakeAdapter.EarthquakeVi
 
     protected var onEarthquakeClickListener : ((Earthquake) -> Unit)? = null
 
-    fun setProductClickListener(listener: (Earthquake) -> Unit){
+    fun setEarthquakeClickListener(listener: (Earthquake) -> Unit){
         onEarthquakeClickListener = listener
     }
 

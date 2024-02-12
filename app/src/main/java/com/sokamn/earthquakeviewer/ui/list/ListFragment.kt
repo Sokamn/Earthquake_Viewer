@@ -34,15 +34,10 @@ class ListFragment : Fragment() {
     // ViewModel
     private val listViewModel: ListViewModel by viewModels()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentListBinding.inflate(inflater, container, false)
 
         return binding.root
@@ -97,7 +92,8 @@ class ListFragment : Fragment() {
                     AppCompatDelegate.MODE_NIGHT_NO
             })
         }
-        earthquakeAdapter.setProductClickListener { earthquake ->
+
+        earthquakeAdapter.setEarthquakeClickListener { earthquake ->
             listViewModel.onEarthquakeSelected(earthquake)
         }
     }
