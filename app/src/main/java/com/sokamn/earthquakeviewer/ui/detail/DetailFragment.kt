@@ -11,6 +11,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.sokamn.earthquakeviewer.R
 import com.sokamn.earthquakeviewer.databinding.FragmentDetailBinding
@@ -22,8 +24,11 @@ import java.text.Format
 import java.text.SimpleDateFormat
 import java.util.Date
 
+@AndroidEntryPoint
 class DetailFragment : Fragment() {
     private val args: DetailFragmentArgs by navArgs()
+
+    private val detailViewModel: DetailViewModel by viewModels()
 
     private var _binding: FragmentDetailBinding? = null
     private val binding get() = _binding!!
@@ -45,22 +50,28 @@ class DetailFragment : Fragment() {
     private fun initUI() {
         setUIComponents()
         initListeners()
+        initObservers()
+    }
+
+    private fun initObservers() {
+        detailViewModel.navigateToMapActivity.observe(viewLifecycleOwner){
+            it.getContentIfNotHandled()?.let {
+                goToMapActivity()
+            }
+        }
     }
 
     private fun setUIComponents() {
         val vibrator = context?.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
-
         setUpVibration(vibrator)
-
         renderEarthquake(args.earthquake)
     }
 
     private fun initListeners() {
         binding.imvPlaceHolderGPS.setOnClickListener {
-            val intent = Intent(activity, MapActivity::class.java)
-            intent.putExtra("earthquakeSelected", args.earthquake)
-            startActivity(intent)
+            detailViewModel.onPlaceHolderGPSSelected()
         }
+
         binding.btnMoreInfoFD.setOnClickListener {
             val link = Uri.parse(args.earthquake.url)
             startActivity(Intent(Intent.ACTION_VIEW, link))
@@ -96,13 +107,19 @@ class DetailFragment : Fragment() {
         val date = convertTimeToDate(selectedEarthquake.duracion)
         val hour = convertTimeToHour(selectedEarthquake.duracion)
 
-        binding.txvTitleEarthquake.text = selectedEarthquake.place
-        binding.txvDateEarthquake.text = date
-        binding.txvHourEarthquake.text = hour
-        binding.txvTsunamiEarthquake.text = selectedEarthquake.tsunami.toString()
-        binding.txvMagnitudeEarthquake.text = selectedEarthquake.magnitude.toString()
-        binding.txvEarthquakeID.text = "ID: ${selectedEarthquake.id}"
-        binding.txvEarthquakeCords.text = "Lat: ${selectedEarthquake.latitude} Lon: ${selectedEarthquake.longitude}"
-        binding.txvKindMagnitudeFD.text = "Tipo de Magnitud: ${selectedEarthquake.magType.uppercase()}"
+        with(binding){
+            txvTitleEarthquake.text = selectedEarthquake.place
+            txvDateEarthquake.text = date
+            txvHourEarthquake.text = hour
+            txvTsunamiEarthquake.text = selectedEarthquake.tsunami.toString()
+            txvMagnitudeEarthquake.text = selectedEarthquake.magnitude.toString()
+            txvEarthquakeID.text = "ID: ${selectedEarthquake.id}"
+            txvEarthquakeCords.text = "Lat: ${selectedEarthquake.latitude} Lon: ${selectedEarthquake.longitude}"
+            txvKindMagnitudeFD.text = "Tipo de Magnitud: ${selectedEarthquake.magType.uppercase()}"
+        }
+    }
+
+    private fun goToMapActivity() {
+        startActivity(MapActivity.create(requireActivity(), args.earthquake.latitude, args.earthquake.longitude))
     }
 }
