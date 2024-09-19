@@ -29,8 +29,6 @@ class ListFragment : Fragment() {
     // EarthquakeAdapter
     private val earthquakeAdapter =  EarthquakeAdapter()
 
-    // Listeners
-
     // ViewModel
     private val listViewModel: ListViewModel by viewModels()
 

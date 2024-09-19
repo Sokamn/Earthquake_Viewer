@@ -112,7 +112,7 @@ class DetailFragment : Fragment() {
             txvDateEarthquake.text = date
             txvHourEarthquake.text = hour
             txvTsunamiEarthquake.text = selectedEarthquake.tsunami.toString()
-            txvMagnitudeEarthquake.text = selectedEarthquake.magnitude.toString()
+            txvMagnitudeEarthquake.text = "%.2f".format(selectedEarthquake.magnitude)
             txvEarthquakeID.text = "ID: ${selectedEarthquake.id}"
             txvEarthquakeCords.text = "Lat: ${selectedEarthquake.latitude} Lon: ${selectedEarthquake.longitude}"
             txvKindMagnitudeFD.text = "Tipo de Magnitud: ${selectedEarthquake.magType.uppercase()}"
