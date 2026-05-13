@@ -1,4 +1,13 @@
 # 🌍 Earthquake Viewer
+
+<a href="https://appetize.io/app/b_smuam7dcvgysk6pucoobcdhgdy" target="_blank">
+  <img src="https://img.shields.io/badge/Live%20Demo-Experience%20the%20App-3DDC84?style=for-the-badge&logo=android&logoColor=white"/>
+</a>
+
+<a href="https://www.figma.com/design/CbOiPi36vLirm3Hp1NYMy3/Earthquake-Viewer?node-id=0-1&t=xY9Dnf1yKjLwGzt2-1" target="_blank">
+  <img src="https://img.shields.io/badge/View%20Figma%20Design-F24E1E?style=for-the-badge&logo=figma&logoColor=white"/>
+</a>
+
 <b>Plataform:</b> Android<br>
 <b>Language:</b> Kotlin<br>
 <b>APIs Used:</b> USGS Earthquake API, MapBox API<br>
