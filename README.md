@@ -53,8 +53,16 @@ Earthquake Viewer is under active development. Upcoming features include:
   <li><b>Custom Filters 🔍:</b> Filter earthquakes by magnitude, date, and location for a more precise search.</li>
 </ul>
 
-### 🤝 Contributions
-Contributions are welcome! If you have ideas or improvements, feel free to open an issue or submit a pull request.
- 
+# 🎨 Design & UX
+
+The entire UI/UX design of Earthquake Viewer was created by myself, focusing on delivering a clean, modern, and intuitive experience for users.
+
+The design prioritizes:
+- Clear earthquake information visualization
+- Fast and simple navigation
+- Minimal and modern interfaces
+- Responsive mobile experience
+
+Special attention was given to readability and usability, allowing users to quickly access important seismic information in a simple and accessible way.
 
  
